@@ -1,6 +1,6 @@
 /*
  * Copyright (c) TechnotypeO, 2020.
- * This project is licensed under a modified BSD-3 license.
+ * This project is licensed under tecc's license (located in "LICENSE.txt").
  */
 
 package me.tecc.tajapi.color;
