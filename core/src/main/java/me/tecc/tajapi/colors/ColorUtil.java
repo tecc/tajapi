@@ -1,15 +1,16 @@
 /*
- * Copyright (c) TechnotypeO, 2020.
- * This project is licensed under tecc's license (located in "LICENSE.txt").
+ * Copyright (c) tecc, 2020.
+ * This project is licensed under tecc's license.
  */
 
-package me.tecc.tajapi.color;
+package me.tecc.tajapi.colors;
+
+import me.tecc.tajapi.util.IntUtil;
 
 import java.awt.*;
 
 /**
  * ColorUtil class is a utility class for working with colors.
- *
  */
 
 public final class ColorUtil {
@@ -30,9 +31,13 @@ public final class ColorUtil {
      * @return A value between {@code 0x000000} (0) and {@code 0xffffff} (2<sup>24</sup>-1)
      * @see Color
      */
-    public static byte getColorFromRGB(int r, int g, int b) {
+    public static int getColorFromRGB(int r, int g, int b) {
+        // wrap the values to make sure they stay within the boundaries
+        r = IntUtil.wrapToClosest(r, 0, 255);
+        g = IntUtil.wrapToClosest(g, 0, 255);
+        b = IntUtil.wrapToClosest(b, 0, 255);
         // set c to r
-        byte c = (byte) r;
+        int c = (byte) r;
         // shift c left by 8 bits
         // to make place for g
         c <<= 8;

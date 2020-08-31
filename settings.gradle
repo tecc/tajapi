@@ -1,2 +1,3 @@
 rootProject.name = 'tajapi'
-
+include 'core'
+findProject(':core')?.name = 'tajapi-core'

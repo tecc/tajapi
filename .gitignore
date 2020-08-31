@@ -1,4 +1,4 @@
-app.txt
 .idea/
 .iml
-/.gradle/
+.gradle/
+build/

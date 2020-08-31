@@ -1,18 +1,22 @@
 plugins {
     id 'java'
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
 group 'me.tecc.tajapi'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
     jcenter()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+allprojects {
+    version '0.1.0-alpha'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    sourceCompatibility = 1.8
 }
