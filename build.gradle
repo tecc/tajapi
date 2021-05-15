@@ -17,6 +17,9 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'com.github.johnrengelman.shadow'
-
     sourceCompatibility = 1.8
+
+    dependencies {
+        implementation 'org.jetbrains:annotations:20.1.0'
+    }
 }
