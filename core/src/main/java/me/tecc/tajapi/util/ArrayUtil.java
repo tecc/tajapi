@@ -1,5 +1,8 @@
 package me.tecc.tajapi.util;
 
+import java.lang.reflect.Array;
+import java.util.function.IntFunction;
+
 public class ArrayUtil {
 
     /**
@@ -12,17 +15,19 @@ public class ArrayUtil {
      * @return array with the inserted value
      * @author Hammer86gn
      */
-    public static <T> T[] insertValue(T[] array, T object, int index) {
-        int totalIndex = array.length + 1;
+    public static <T> T[] insertValue(T[] array, T object, int index, IntFunction<T[]> instantiate) {
+        int totalLen = array.length + 1;
 
-        T[] tempArray = (T[]) new Object[totalIndex];
+        T[] tempArray = instantiate.apply(totalLen);
 
-        for (int i = 0; i < totalIndex; i++) {
+        int offset = 0;
+        for (int i = 0; i < totalLen; i++) {
 
             if (i == index) {
                 tempArray[i] = object;
+                offset++;
             } else {
-                tempArray[i] = array[i];
+                tempArray[i] = array[i - offset];
             }
 
         }
@@ -39,14 +44,16 @@ public class ArrayUtil {
      * @return array with the value appended
      * @author Hammer86gn
      */
-    public static <T> T[] appendValue(T[] array, T value) {
-        int totalIndex = array.length + 2;
+    public static <T> T[] appendValue(T[] array, T value, IntFunction<T[]> instantiate) {
+        int totalLen = array.length + 1;
 
-        T[] tempArray = (T[]) new Object[totalIndex];
+        T[] tempArray = instantiate.apply(totalLen);
 
-        System.arraycopy(array, 0, tempArray, 0, totalIndex);
+        System.arraycopy(array, 0, tempArray, 0, totalLen);
 
-        tempArray[totalIndex - 1] = value;
+        tempArray[totalLen] = value;
+
+
 
         return tempArray;
     }
@@ -61,17 +68,12 @@ public class ArrayUtil {
      * @author Hammer86gn
      */
     public static <T> T[] mergeArray(T[] array, T[] other) {
-        int totalIndex = array.length + other.length;
+        int totalLen = array.length + other.length;
 
-        T[] tempArray = (T[]) new Object[totalIndex];
+        T[] tempArray = (T[]) Array.newInstance(Object.class,totalLen);
 
-        for (int i = 0; i < totalIndex; i++) {
-            if ((array.length - totalIndex) > 0) {
-                tempArray[i] = array[i];
-            } else {
-                tempArray[i] = other[totalIndex - other.length];
-            }
-        }
+        System.arraycopy(array,0,tempArray,0,totalLen);
+        System.arraycopy(other,0,tempArray,array.length + 1,totalLen);
 
         return tempArray;
     }
